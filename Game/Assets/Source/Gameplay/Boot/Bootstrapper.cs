@@ -21,7 +21,6 @@ namespace Gameplay.Boot
         private void Start()
         {
             _stateMachine.AddState(_stateFactory.CreateState<BootState>());
-
             _stateMachine.Enter<BootState>().Forget();
         }
     }

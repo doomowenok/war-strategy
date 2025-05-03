@@ -1,3 +1,6 @@
+using Gameplay.Core;
+using Gameplay.Services;
+using Gameplay.Services.Installers;
 using VContainer;
 using VContainer.Unity;
 using Infrastructure.Pool.Installers;
@@ -37,6 +40,10 @@ namespace Gameplay.Boot
 
             // Services
             InstallBindings<PhysicsInstaller>(builder);
+            InstallBindings<SystemInjectorInstaller>(builder);
+            InstallBindings<LocatorInstaller>(builder);
+            
+            // Core
         }
 
         private static void InstallBindings<TInstaller>(IContainerBuilder builder) where TInstaller : IInstaller,  new() 
