@@ -1,3 +1,4 @@
+using Gameplay.Core;
 using VContainer;
 
 namespace Gameplay.Services
@@ -13,7 +14,7 @@ namespace Gameplay.Services
         
         public void Register()
         {
-            
+            ServiceLocator.Register(_container.Resolve<IInputSystem>());
         }
     }
 }

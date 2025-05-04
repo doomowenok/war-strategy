@@ -20,6 +20,8 @@ namespace Gameplay.Core
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
+            state.Enabled = false;
+            
             var config = SystemAPI.GetSingleton<UnitConfigComponent>();
             EntityCommandBuffer ecb = new EntityCommandBuffer(Allocator.TempJob);
 
@@ -44,14 +46,14 @@ namespace Gameplay.Core
     }
 
     [BurstCompile]
-    public partial struct CreateUnitsJob : IJobEntity
+    public struct CreateUnitsJob : IJob
     {
         public Entity Prefab;
         public EntityCommandBuffer Ecb;
         public float3 Position;
 
         [BurstCompile]
-        public void Execute(in UnitCreationRequest request)
+        public void Execute()
         {
             var entity = Ecb.Instantiate(Prefab);
             Ecb.SetComponent(entity, new LocalTransform()
@@ -60,6 +62,7 @@ namespace Gameplay.Core
                 Rotation = quaternion.identity,
                 Scale = 1.0f
             });
+            Ecb.AddComponent<Unit>(entity);
         }
     }
 }

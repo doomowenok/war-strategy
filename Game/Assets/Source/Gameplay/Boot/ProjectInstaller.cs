@@ -44,6 +44,8 @@ namespace Gameplay.Boot
             InstallBindings<LocatorInstaller>(builder);
             
             // Core
+            InstallBindings<InputInstaller>(builder);
+            InstallBindings<CameraInstaller>(builder);
         }
 
         private static void InstallBindings<TInstaller>(IContainerBuilder builder) where TInstaller : IInstaller,  new() 
